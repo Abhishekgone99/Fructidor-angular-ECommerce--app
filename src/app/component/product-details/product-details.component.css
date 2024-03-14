@@ -1,0 +1,15 @@
+.mainProductImage {
+  img {
+    height: 450px;
+    width: 450px;
+  }
+}
+
+.subProductImage {
+  img {
+    height: 90px;
+    width: 90px;
+    margin-top: 20px;
+    margin-right: 20px;
+  }
+}

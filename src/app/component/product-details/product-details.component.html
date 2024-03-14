@@ -1,0 +1,86 @@
+<app-header></app-header>
+<app-search-bar></app-search-bar>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Cauliflower</li>
+    </ol>
+</nav>
+
+@if (productDetails) {
+@for (productdetail of productDetails; track productdetail.id) {
+<main class="d-flex">
+    <div class="mainProductImage">
+        <img [src]="productdetail.thumbnail_image" alt="">
+        <div class="subProductImage">
+            <img [src]="productdetail.feature_image" alt="">
+            <img [src]="productdetail.feature_image" alt="">
+            <img [src]="productdetail.feature_image" alt="">
+            <img [src]="productdetail.feature_image" alt="">
+        </div>
+    </div>
+
+    <div class="productInfo">
+        <h4>{{productdetail.product_variety_name}}
+            <span class="btn origin_country"><img src="../../../assets/location.svg" alt="" />
+                {{productdetail.origin}}</span>
+            <span class="btn organic_type">
+                {{productdetail.organic ? "Organic" : "Conventional"}}</span>
+            <span class="btn class_type">
+                {{productdetail.product_class}}</span>
+        </h4>
+        <h5>{{productdetail.company_name}}</h5>
+        <p>${{productdetail.price}}/{{productdetail.price_per_unit}}</p>
+        <p><app-rating></app-rating></p>
+        <div>Quantity <button><i class="fa-solid fa-minus"></i></button> <span>0</span> <button><i
+                    class="fa-solid fa-plus"></i></button> in kg</div>
+        <div class="d-flex gap-2">
+            <div>Jan</div>
+            <div>Feb</div>
+            <div>Mar</div>
+            <div>Apr</div>
+            <div>May</div>
+            <div>Jun</div>
+            <div>Jul</div>
+            <div>Aug</div>
+            <div>Sep</div>
+            <div>Oct</div>
+            <div>Nov</div>
+            <div>Dec</div>
+        </div>
+        <div>
+            1K+ Buyers Bought in Last Month
+        </div>
+        <button>Get a quote</button>
+        <div class="d-flex gap-3">
+            <div class="d-flex gap-2">
+                <img src="../../../assets/pacakge.svg" alt="">
+                <div>
+                    <div>Box Weight:{{productdetail.box_weight}}</div>
+                    <div>Box Type:{{productdetail.box_type}}</div>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <img src="../../../assets/vehicle.svg" alt="">
+                <div>
+                    <div>Port Loading:{{productdetail.loading_port}}</div>
+                    <div>Est.Loading Time:{{productdetail.est_loading_time}}</div>
+                </div>
+            </div>
+        </div>
+        <div>Extra Information <p>{{productdetail.information}}</p>
+        </div>
+
+    </div>
+</main>
+}
+}
+
+<div>
+    <div>Similar Products you might like</div>
+
+    <div>
+
+    </div>
+</div>

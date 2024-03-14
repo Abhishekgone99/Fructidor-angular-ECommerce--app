@@ -1,0 +1,184 @@
+<div>
+  <div>
+    <h4 class="text-center mt-5">MARKET PLACE</h4>
+    <div class="d-flex justify-content-center toggle_buttons mb-5 mt-4">
+      <button class="btn mx-2" [class.active]="isActive('all')" (click)="filterProductsByListingType('all')">
+        All
+      </button>
+      <button class="btn mx-2" [class.active]="isActive('offer')" (click)="filterProductsByListingType('offer')">
+        Buyers Alerts
+      </button>
+      <button class="btn mx-2" [class.active]="isActive('demand')" (click)="filterProductsByListingType('demand')">
+        Sales Offers
+      </button>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="col-2 border border-secondary-subtle">
+        <div class="border-bottom mt-2 mb-2">Filter & Refine</div>
+        @if (filterCategories) {
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Fruit Type
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <ul>
+                  <li><input type="checkbox" /> All</li>
+                  <li><input type="checkbox" /> Apple</li>
+                  <li><input type="checkbox" /> Apricot</li>
+                  <li><input type="checkbox" /> Avocado</li>
+                  <li><input type="checkbox" /> Banana</li>
+                  <li><input type="checkbox" /> Blackberry</li>
+                  <li><input type="checkbox" /> Black Table Grape</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                Fruit Variety
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <ul>
+                  <li><input type="checkbox" /> Any variety of Apple</li>
+                  <li><input type="checkbox" /> Golden Delicious</li>
+                  <li><input type="checkbox" /> Granny Smith</li>
+                  <li><input type="checkbox" /> Jona Gold</li>
+                  <li><input type="checkbox" /> Pink Lady</li>
+                  <li><input type="checkbox" /> Red Chief</li>
+                  <li><input type="checkbox" /> Red Delicious</li>
+                  <li><input type="checkbox" /> Red Fuji</li>
+                  <li><input type="checkbox" /> Royal Gala</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                Availability
+              </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <ul>
+                  <li><input type="checkbox" /> Available</li>
+                  <li><input type="checkbox" /> Not Available</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                Cultivation Type
+              </button>
+            </h2>
+            <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <ul>
+                  <li><input type="checkbox" /> Organic</li>
+                  <li><input type="checkbox" /> Hybrid</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                Port
+              </button>
+            </h2>
+            <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <ul>
+                  <li><input type="checkbox" /> Mumbai</li>
+                  <li><input type="checkbox" /> Goa</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </aside>
+
+      <main class="col-10 border-top border-secondary-subtle">
+        <div class="border-bottom mt-2 mb-2">Filter</div>
+        <div class="d-flex justify-content-between mt-3 mb-3">
+          <div>
+            All Listings (<span>{{ products.length }}</span>)
+          </div>
+          <div>
+            <div class="dropdown">
+              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Sort by :
+              </button>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item" (click)="sortProductsLatest()">New Listings</li>
+                <li class="dropdown-item" (click)="sortProductsByName()">Product Name</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5">
+          @if (products) { @for (product of products; track product.id) {
+          <div class="col">
+            <section class="card-container">
+              <div class="card">
+                <img [src]="product.thumbnail_image" class="card-img-top" alt="..." (click)="
+                    navigateToProductDetails(product.listing_type, product.id)
+                  " />
+                <div class="card-body">
+                  <h6 class="card-title" (click)="
+                      navigateToProductDetails(product.listing_type, product.id)
+                    ">
+                    {{ product.product_type_name }}
+                    {{ product.product_variety_name }}
+                  </h6>
+                  <p class="card-text company" (click)="navigateToCompany(product.company_id)">
+                    {{ product.company_name }}
+                  </p>
+                  @if (product.price && product.price_per_unit) {
+                  <p class="card-text">
+                    ${{ product.price }} / {{ product.price_per_unit }}
+                  </p>
+                  } @if (product.quantity && product.quantity_unit) {
+                  <p class="card-text">
+                    <span class="mx-1">{{ product.quantity }}</span><span>{{ product.quantity_unit }}</span>
+                  </p>
+                  }
+                  <div>
+                    @if (product.origin) {
+                    <span class="btn origin_country"><img src="../../../assets/location.svg" alt="" />{{
+                      product.origin
+                      }}</span>
+                    }
+                    <span class="btn organic_type">{{
+                      product.organic ? "Organic" : "Conventional"
+                      }}</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          } }
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
