@@ -2,5 +2,26 @@
 <app-search-bar></app-search-bar>
 
 <div>
-    <h4>News</h4>
+    <h4 class="mx-5 my-5">News</h4>
+
+    @if (newsList) {
+    @for (news of newsList; track news.id) {
+    <div class="card-container">
+        <div class="card d-flex flex-row align-items-center mt-3 mx-5 p-3">
+            <img style="height: 200px; width: 200px;" [src]="news.image_url" alt="">
+            <div class="card-body mt-2">
+                <h5>{{news.title}}</h5>
+                <p>{{news.created_at}}
+                    <span class="btn origin_country">
+                        <img src="../../../assets/location.svg" alt="" />
+                        {{news.country_name}}
+                    </span>
+                </p>
+                <p>{{news.summary}}</p>
+                <p (click)="navigateToNewsDetails(news.id)">Read more <i class="fa-solid fa-arrow-right"></i></p>
+            </div>
+        </div>
+    </div>
+    }
+    }
 </div>

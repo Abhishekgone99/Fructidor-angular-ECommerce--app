@@ -4,7 +4,8 @@ import { LoginComponent } from './component/login/login.component';
 import { NewsComponent } from './component/news/news.component';
 import { ProductsComponent } from './component/products/products.component';
 import { ProductDetailsComponent } from './component/product-details/product-details.component';
-import { AboutCompanyComponent } from './component/about-company/about-company.component';
+import { CompanyDetailsComponent } from './component/company-details/company-details.component';
+import { NewsDetailsComponent } from './component/news-details/news-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,6 +19,10 @@ export const routes: Routes = [
   },
   {
     path: 'company/:id',
-    component: AboutCompanyComponent,
+    component: CompanyDetailsComponent,
+  },
+  {
+    path: 'news/:id',
+    component: NewsDetailsComponent,
   },
 ];

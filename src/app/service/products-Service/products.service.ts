@@ -18,6 +18,22 @@ export class ProductsService {
   private _produtDemandDetailsUrl =
     'https://marketplace.hashagile.com/api/demand_details?lang=en';
 
+  private _newsListUrl = 'https://marketplace.hashagile.com//api/news';
+
+  private _basiccompanyDetailsUrl =
+    'https://marketplace.hashagile.com//api/company/basic_company_details';
+
+  private _staffDetailsUrl = 'https://marketplace.hashagile.com//api/company';
+
+  private _companyStatsUrl =
+    'https://marketplace.hashagile.com//api/company/company_stats';
+
+  private _additionalComapnyDetailsUrl =
+    'https://marketplace.hashagile.com//api/company/additional_details';
+
+  private _companyProfileUrl =
+    'https://marketplace.hashagile.com//api/company/company_profile';
+
   getProducts(payload: any): Observable<any> {
     return this.http
       .post(this._productsUrl, payload)
@@ -31,16 +47,56 @@ export class ProductsService {
   }
 
   getProductOfferDetails(): Observable<any> {
-    debugger;
     return this.http
       .get(this._produtOfferDetailsUrl)
       .pipe(catchError(this.errorHandler));
   }
 
   getProductDemandDetails(): Observable<any> {
-    debugger;
     return this.http
       .get(this._produtDemandDetailsUrl)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getNewsList(): Observable<any> {
+    return this.http
+      .get(`${this._newsListUrl}?lang=en`)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getNewsDetails(newsId: any): Observable<any> {
+    return this.http
+      .get(`${this._newsListUrl}/${newsId}?lang=en`)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getBasicCompanyDetails(companyId: any): Observable<any> {
+    return this.http
+      .get(`${this._basiccompanyDetailsUrl}/${companyId}`)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getStaffDetails(companyId: any): Observable<any> {
+    return this.http
+      .get(`${this._staffDetailsUrl}/${companyId}/staffs`)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getCompanyStats(companyId: any): Observable<any> {
+    return this.http
+      .get(`${this._companyStatsUrl}/${companyId}`)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getAdditionalComapnyDetails(companyId: any): Observable<any> {
+    return this.http
+      .get(`${this._additionalComapnyDetailsUrl}/${companyId}`)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  getCompanyprofile(companyId: any): Observable<any> {
+    return this.http
+      .get(`${this._companyProfileUrl}/${companyId}`)
       .pipe(catchError(this.errorHandler));
   }
 

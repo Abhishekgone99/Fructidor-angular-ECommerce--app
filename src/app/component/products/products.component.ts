@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../service/products-Service/products.service';
 import { Router } from '@angular/router';
+import { SearchService } from '../../service/search-service/search.service';
 
 @Component({
   selector: 'app-products',
@@ -24,7 +25,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productService: ProductsService,
-    private router: Router
+    private router: Router,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +34,10 @@ export class ProductsComponent implements OnInit {
     this.fetchProducts();
     this.fetchFilterCategories();
     // this.sortProducts('newListing');
+    this.searchService.searchTerm.subscribe((term: string) => {
+      this.payload.query = term;
+      this.fetchProducts();
+    });
   }
 
   fetchProducts() {

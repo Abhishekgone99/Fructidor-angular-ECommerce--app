@@ -13,3 +13,55 @@
     margin-right: 20px;
   }
 }
+
+.card {
+  height: 400px;
+  margin-bottom: 25px;
+  img {
+    height: 150px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+}
+
+.card-body {
+  .card-title {
+    color: orangered;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+  .card-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-text.company:hover {
+    cursor: pointer;
+    color: green;
+  }
+}
+
+.origin_country {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 12px;
+  margin-right: 5px;
+  pointer-events: none;
+  text-wrap: nowrap;
+  img {
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+  }
+}
+.organic_type {
+  border: 1px solid rgb(255, 255, 0);
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 12px;
+  pointer-events: none;
+  text-wrap: nowrap;
+}

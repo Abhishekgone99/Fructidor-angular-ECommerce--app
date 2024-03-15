@@ -52,7 +52,13 @@
         <div>
             1K+ Buyers Bought in Last Month
         </div>
-        <button>Get a quote</button>
+        <div>
+            @if (productdetail.listing_type == 'offer') {
+            <button>Get a quote</button>
+            }@else{
+            <button>Offer</button>
+            }
+        </div>
         <div class="d-flex gap-3">
             <div class="d-flex gap-2">
                 <img src="../../../assets/pacakge.svg" alt="">
@@ -80,7 +86,47 @@
 <div>
     <div>Similar Products you might like</div>
 
-    <div>
-
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5">
+        @if (productList) { @for (product of productList; track product.id) {
+        <div class="col">
+            <section class="card-container">
+                <div class="card">
+                    <img [src]="product.thumbnail_image" class="card-img-top" alt="..." (click)="
+                  navigateToProductDetails(product.listing_type, product.id)
+                " />
+                    <div class="card-body">
+                        <h6 class="card-title" (click)="
+                    navigateToProductDetails(product.listing_type, product.id)
+                  ">
+                            {{ product.product_type_name }}
+                            {{ product.product_variety_name }}
+                        </h6>
+                        <p class="card-text company" (click)="navigateToCompany(product.company_id)">
+                            {{ product.company_name }}
+                        </p>
+                        @if (product.price && product.price_per_unit) {
+                        <p class="card-text">
+                            ${{ product.price }} / {{ product.price_per_unit }}
+                        </p>
+                        } @if (product.quantity && product.quantity_unit) {
+                        <p class="card-text">
+                            <span class="mx-1">{{ product.quantity }}</span><span>{{ product.quantity_unit }}</span>
+                        </p>
+                        }
+                        <div>
+                            @if (product.origin) {
+                            <span class="btn origin_country"><img src="../../../assets/location.svg" alt="" />{{
+                                product.origin
+                                }}</span>
+                            }
+                            <span class="btn organic_type">{{
+                                product.organic ? "Organic" : "Conventional"
+                                }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        } }
     </div>
 </div>
