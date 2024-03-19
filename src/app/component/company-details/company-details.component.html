@@ -1,11 +1,98 @@
 <app-header></app-header>
 
-<div>
-    <div class="company-backdrop-img"></div>
+<div class="company-backdrop-img">
 
-    <div class="company-header">
-        <div>
-
+    @if (basicCompanyDetails) {
+    <div class="card-container">
+        <div class="card">
+            <div class="comp-profile d-flex flex-row p-3  justify-content-around">
+                <img style="height: 200px; width: 200px;" [src]="basicCompanyDetails.company_logo_url" alt="">
+                <div class="mx-5 card-body">
+                    <h5>{{basicCompanyDetails.company_name}} <img src="../../../assets/crown.svg" alt=""></h5>
+                    <p>{{basicCompanyDetails.company_address_info}}</p>
+                    <div class="d-flex">
+                        <p>Phone:{{basicCompanyDetails.company_phone_number}}</p>
+                        <p>Fax:{{basicCompanyDetails.company_fax}}</p>
+                        <p>TVA:{{basicCompanyDetails.company_tva}}</p>
+                    </div>
+                    <p>Website:{{basicCompanyDetails.company_website}}</p>
+                    <div class="d-flex">
+                        <p><img style="height: 12px; width: 12px;" src="../../../assets/crown.svg"
+                                alt="">{{basicCompanyDetails.company_subscription}}</p>
+                        <p><img src="../../../assets/date.svg" alt="">
+                            Joined:{{basicCompanyDetails.company_joined_data}}
+                        </p>
+                        <p><img src="../../../assets/thumbs-up.svg" alt="">98% Positive Feedback</p>
+                        <p><img src="../../../assets/certified.svg" alt="">{{basicCompanyDetails.company_is_certified ?
+                            'Certified' : ''}}</p>
+                        <p><img src="../../../assets/save teller.svg" alt="">Save Seller</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-column justify-content-between">
+                    <div>
+                        <p>Profile Completion 80%</p>
+                        <ngb-progressbar type="success" [value]="80" />
+                    </div>
+                    <p>Feedback <span><img src="../../../assets/thumbs-up.svg" alt=""></span> <span><img
+                                src="../../../assets/thumbs-down.svg" alt=""></span> </p>
+                </div>
+            </div>
+            <div class="sub-nav-header d-flex gap-5">
+                <p [class.active]="selectedTab === 'overview'" (click)="showTab('overview')">Overview</p>
+                <p [class.active]="selectedTab === 'ourProducts'" (click)="showTab('ourProducts')">Our Products</p>
+                <p [class.active]="selectedTab === 'news'" (click)="showTab('news')">News</p>
+                <p [class.active]="selectedTab === 'contactUs'" (click)="showTab('contactUs')">Contact Us</p>
+            </div>
         </div>
+    </div>
+    }
+
+    <div class="tab-content">
+        @switch (selectedTab) {
+        @case ('overview') {
+        <app-company-overview [companyId]="companyId" [companyProfile]="companyProfile"
+            [additionalCompanyDetails]="additionalCompanyDetails" [companyStats]="companyStats"></app-company-overview>
+        }
+        @case ('ourProducts') {
+        <app-company-products [companyId]="companyId"></app-company-products>
+        }
+        @case ('news') {
+        <div>
+            <div class=" d-flex justify-content-between align-items-center">
+                <h4 class="my-5" style="margin-left: 90px;">News</h4>
+                <div class="d-flex" style="margin-right: 110px;">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>World Wide</option>
+                    </select>
+                </div>
+            </div>
+
+            @if (newsList) {
+            @for (news of newsList; track news.id) {
+            <div class="container">
+                <div class="card d-flex flex-row align-items-center mt-3 mx-5 p-3">
+                    <img style="height: 200px; width: 200px;" [src]="news.image_url" alt="">
+                    <div class="card-body mt-2">
+                        <h5>{{news.title}}</h5>
+                        <p>{{news.created_at}}
+                            <span class="btn origin_country">
+                                <img src="../../../assets/location.svg" alt="" />
+                                {{news.country_name}}
+                            </span>
+                        </p>
+                        <p>{{news.summary}}</p>
+                        <p (click)="navigateToNewsDetails(news.id)">Read more <i class="fa-solid fa-arrow-right"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            }
+            }
+        </div>
+        }
+        @case ('contactUs') {
+        <app-company-contact [companyId]="companyId"></app-company-contact>
+        }
+        }
     </div>
 </div>

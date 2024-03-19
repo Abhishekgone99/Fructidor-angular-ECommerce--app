@@ -140,9 +140,14 @@
           <div class="col">
             <section class="card-container">
               <div class="card">
-                <img [src]="product.thumbnail_image" class="card-img-top" alt="..." (click)="
+                <div>
+                  <img [src]="product.thumbnail_image" class="card-img-top" alt="..." (click)="
                     navigateToProductDetails(product.listing_type, product.id)
                   " />
+                  <div class="offer-label"
+                    [ngStyle]="{'background-color': product.listing_type === 'offer' ? 'orangered' : 'green'}">
+                    {{product.listing_type === 'offer' ? 'Offer' : 'Demand'}}</div>
+                </div>
                 <div class="card-body">
                   <h6 class="card-title" (click)="
                       navigateToProductDetails(product.listing_type, product.id)

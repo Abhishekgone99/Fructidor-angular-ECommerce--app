@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../service/products-Service/products.service';
 import { Router } from '@angular/router';
 import { SearchService } from '../../service/search-service/search.service';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [],
+  imports: [NgStyle],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -30,7 +31,6 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
     this.fetchProducts();
     this.fetchFilterCategories();
     // this.sortProducts('newListing');

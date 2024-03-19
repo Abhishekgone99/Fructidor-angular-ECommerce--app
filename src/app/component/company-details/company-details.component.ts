@@ -2,13 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../service/products-Service/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import { CompanyOverviewComponent } from '../company-overview/company-overview.component';
+import { CompanyProductsComponent } from '../company-products/company-products.component';
+import { NewsComponent } from '../news/news.component';
+import { CompanyContactComponent } from '../company-contact/company-contact.component';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-about-company',
   standalone: true,
   templateUrl: './company-details.component.html',
   styleUrl: './company-details.component.css',
-  imports: [HeaderComponent],
+  imports: [
+    HeaderComponent,
+    CompanyOverviewComponent,
+    CompanyProductsComponent,
+    NewsComponent,
+    CompanyContactComponent,
+    NgbProgressbarModule,
+  ],
 })
 export class CompanyDetailsComponent implements OnInit {
   companyId: any;
@@ -17,6 +29,8 @@ export class CompanyDetailsComponent implements OnInit {
   companyStats: any;
   additionalCompanyDetails: any;
   companyProfile: any;
+  selectedTab: any;
+  newsList: any;
 
   constructor(
     private productService: ProductsService,
@@ -28,6 +42,14 @@ export class CompanyDetailsComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       this.companyId = params.get('id');
     });
+    this.fetchBasicCompanyDetails();
+    this.fetchStaffDetails();
+    this.fetchCompanyStats();
+    this.fetchAdditionalCompanyDetails();
+    this.fetchCompanyProfile();
+    this.fetchCompanyNews();
+
+    this.selectedTab = 'overview';
   }
 
   fetchBasicCompanyDetails() {
@@ -68,5 +90,36 @@ export class CompanyDetailsComponent implements OnInit {
         this.companyProfile = res;
       },
     });
+  }
+
+  // navigateToOverview() {
+  //   this.router.navigate(['/overview']);
+  // }
+
+  // navigateToProducts() {}
+
+  // navigateToNews() {}
+
+  // navigateToContactus() {}
+
+  showTab(tabName: string) {
+    this.selectedTab = tabName;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { tab: tabName },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  fetchCompanyNews() {
+    this.productService.getCompanyNews(this.companyId).subscribe({
+      next: (res) => {
+        this.newsList = res;
+      },
+    });
+  }
+
+  navigateToNewsDetails(newsId: number) {
+    this.router.navigate(['news', newsId]);
   }
 }

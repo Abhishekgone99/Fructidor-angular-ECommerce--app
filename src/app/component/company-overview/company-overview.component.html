@@ -1,0 +1,169 @@
+<div class="container">
+    <div class="row">
+        <main class="border col-8 p-3">
+            <div>
+                <h5 class="mb-3 mt-3">About Us</h5>
+                <p>{{companyProfile.company_description}}</p>
+            </div>
+
+            <div>
+                <h5 class="mb-3 mt-3">Popular Products</h5>
+                @if (companyProfile.company_popular_products) {
+                @for (popularProducts of companyProfile.company_popular_products; track $index) {
+                <span class="pop-products">{{popularProducts}}</span>
+                }
+                }
+            </div>
+
+            <div>
+                <h5 class="mt-3 mb-3">Cultivation Type</h5>
+                @if (companyProfile.company_cultivation_types) {
+                @for (cultivationType of companyProfile.company_cultivation_types; track $index) {
+                <span class="culti-type">{{cultivationType}}</span>
+                }
+                }
+            </div>
+
+        </main>
+
+        <aside class="border col-3 p-3 comp-details">
+            <h5 class="pb-3 pt-3 border-bottom">Company Details</h5>
+
+            <div>
+                <h6 class="mt-3">Our Activities</h6>
+                @if (additionalCompanyDetails.company_activities) {
+                @for (activities of additionalCompanyDetails.company_activities; track $index) {
+                <span>{{activities}} & </span>
+                }
+                }
+            </div>
+
+            <div>
+                <h6 class="mb-3 mt-3">Our Commercial Zones</h6>
+                @if (additionalCompanyDetails.company_commercial_zones) {
+                @for (commercialZones of additionalCompanyDetails.company_commercial_zones; track $index) {
+                <span>{{commercialZones}}, </span>
+                }
+                }
+            </div>
+
+            <div>
+                <h6 class="mb-3 mt-3">Our Main Activities</h6>
+                @if (additionalCompanyDetails.company_main_activities) {
+                @for (mainActivities of additionalCompanyDetails.company_main_activities; track $index) {
+                <span>{{mainActivities}} & </span>
+                }
+                }
+            </div>
+
+            <div>
+                <h6 class="mb-3 mt-3">Origin</h6>
+                @if (additionalCompanyDetails.company_origin) {
+                @for (companyOrigin of additionalCompanyDetails.company_origin; track $index) {
+                <span>{{companyOrigin}} & </span>
+                }
+                }
+            </div>
+
+            <div>
+                <h6 class="mb-3 mt-3">Our Brand Names</h6>
+                @if (additionalCompanyDetails.company_brand_names) {
+                @for (companyBrandNames of additionalCompanyDetails.company_brand_names; track $index) {
+                <span>{{companyBrandNames}},</span>
+                }
+                }
+            </div>
+
+        </aside>
+
+    </div>
+
+    <div class="row">
+        <article class="col-8">
+            <div class="d-flex toggle_buttons mb-5 mt-4">
+                <button class="btn mx-2" [class.active]="activeButton === 'offer'"
+                    (click)="toggleProducts('offer')">Current Offers</button>
+                <button class="btn mx-2" [class.active]="activeButton === 'demand'"
+                    (click)="toggleProducts('demand')">Current Demands</button>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                @if (productsList) { @for (product of productsList; track product.id) {
+                <div class="col">
+                    <section class="card-container">
+                        <div class="card">
+                            <img [src]="product.thumbnail_image" class="card-img-top" alt="..." (click)="
+                          navigateToProductDetails(product.listing_type.toLowerCase(), product.id)
+                        " />
+                            <div class="card-body">
+                                <h6 class="card-title" (click)="
+                            navigateToProductDetails(product.listing_type.toLowerCase(), product.id)
+                          ">
+                                    {{ product.product_type_name }}
+                                    {{ product.product_variety_name }}
+                                </h6>
+                                <p class="card-text company" (click)="navigateToCompany(product.company_id)">
+                                    {{ product.company_name }}
+                                </p>
+                                @if (product.price && product.price_per_unit) {
+                                <p class="card-text">
+                                    ${{ product.price }} / {{ product.price_per_unit }}
+                                </p>
+                                } @if (product.quantity && product.quantity_unit) {
+                                <p class="card-text">
+                                    <span class="mx-1">{{ product.quantity }}</span><span>{{ product.quantity_unit
+                                        }}</span>
+                                </p>
+                                }
+                                <div>
+                                    @if (product.origin) {
+                                    <span class="btn origin_country"><img src="../../../assets/location.svg" alt="" />{{
+                                        product.origin
+                                        }}</span>
+                                    }
+                                    <span class="btn organic_type">{{
+                                        product.organic ? "Organic" : "Conventional"
+                                        }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                } }
+            </div>
+
+
+        </article>
+
+        <aside class="col-3 p-3 border comp-stats">
+            <h5 class="pb-3 pt-3 border-bottom">Detailed Seller Stats
+                <span style="font-size: 14px;">( last 12 months )</span>
+            </h5>
+
+            <div>
+                <h6 class="mt-3">Accurate Description</h6>
+                <div class="d-flex align-items-center gap-3">
+                    <ngb-progressbar style="width: 70%;" type="success" [value]="companyStats.accurate_description" />
+                    <div>{{companyStats.accurate_description}}</div>
+                </div>
+            </div>
+
+            <div>
+                <h6 class="mb-3 mt-3">Shipping Speed</h6>
+                <div class="d-flex align-items-center gap-3">
+                    <ngb-progressbar style="width: 70%;" type="success" [value]="companyStats.shipping_speed" />
+                    <div>{{companyStats.shipping_speed}}</div>
+                </div>
+            </div>
+
+            <div>
+                <h6 class="mb-3 mt-3">Product Quality</h6>
+                <div class="d-flex align-items-center gap-3">
+                    <ngb-progressbar style="width: 70%;" type="success" [value]="companyStats.product_quality" />
+                    <div>{{companyStats.product_quality}}</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+</div>

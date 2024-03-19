@@ -26,7 +26,6 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    debugger;
     this.route.paramMap.subscribe((params) => {
       this.productId = params.get('id');
       this.listingType = params.get('listing_type');

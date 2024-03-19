@@ -34,6 +34,9 @@ export class ProductsService {
   private _companyProfileUrl =
     'https://marketplace.hashagile.com//api/company/company_profile';
 
+  private _currentOffersUrl = 'https://marketplace.hashagile.com//api/company';
+  private _currentDemandsUrl = 'https://marketplace.hashagile.com//api/company';
+
   getProducts(payload: any): Observable<any> {
     return this.http
       .post(this._productsUrl, payload)
@@ -98,6 +101,33 @@ export class ProductsService {
     return this.http
       .get(`${this._companyProfileUrl}/${companyId}`)
       .pipe(catchError(this.errorHandler));
+  }
+
+  getCurrentOffers(companyId: any): Observable<any> {
+    return this.http.get(
+      `${this._currentOffersUrl}/${companyId}/offer_details?lang-en`
+    );
+  }
+
+  getCurrentDemands(companyId: any): Observable<any> {
+    return this.http.get(
+      `${this._currentDemandsUrl}/${companyId}/demand_details?lang=en`
+    );
+  }
+
+  getCompanyProducts(companyId: any): Observable<any> {
+    const _url = 'https://marketplace.hashagile.com//api/company';
+    return this.http.get(`${_url}/${companyId}/offer_details?lang=en`);
+  }
+
+  getImportsFrom(companyId: any): Observable<any> {
+    const _url = 'https://marketplace.hashagile.com//api/company/imports';
+    return this.http.get(`${_url}/${companyId}`);
+  }
+
+  getCompanyNews(companyId: any): Observable<any> {
+    const _url = 'https://marketplace.hashagile.com//api/company';
+    return this.http.get(`${_url}/${companyId}/news`);
   }
 
   errorHandler(error: HttpErrorResponse) {

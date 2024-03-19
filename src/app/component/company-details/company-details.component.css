@@ -3,4 +3,33 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 250px;
+  position: relative;
+}
+
+.card-container {
+  position: relative;
+  top: 120px;
+  left: 110px;
+  width: 85%;
+}
+
+.comp-profile {
+  background-color: rgba(245, 241, 241, 1);
+}
+
+.tab-content {
+  margin-top: 150px;
+  /* width: 80%; */
+  margin-left: 30px;
+}
+
+.sub-nav-header p {
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.sub-nav-header p.active {
+  color: orangered;
+  border-bottom: 2px solid orangered;
+  cursor: pointer;
 }

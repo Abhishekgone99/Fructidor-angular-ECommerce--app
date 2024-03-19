@@ -6,6 +6,9 @@ import { ProductsComponent } from './component/products/products.component';
 import { ProductDetailsComponent } from './component/product-details/product-details.component';
 import { CompanyDetailsComponent } from './component/company-details/company-details.component';
 import { NewsDetailsComponent } from './component/news-details/news-details.component';
+import { CompanyOverviewComponent } from './component/company-overview/company-overview.component';
+import { CompanyProductsComponent } from './component/company-products/company-products.component';
+import { CompanyContactComponent } from './component/company-contact/company-contact.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,6 +23,11 @@ export const routes: Routes = [
   {
     path: 'company/:id',
     component: CompanyDetailsComponent,
+    children: [
+      { path: 'overview', component: CompanyOverviewComponent },
+      { path: 'ourProducts', component: CompanyProductsComponent },
+      { path: 'contactUs', component: CompanyContactComponent },
+    ],
   },
   {
     path: 'news/:id',

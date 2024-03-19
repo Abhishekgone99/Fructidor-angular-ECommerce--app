@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row">
+        <main class="col-8">
+            <div class=" d-flex justify-content-between align-items-center">
+                <h5>Our Products</h5>
+                <div class="d-flex gap-3">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>New Listings</option>
+                        <option value="1">Product Name</option>
+                    </select>
+
+                    <button class="btn add-products"><i class="fa-solid fa-plus"></i>Add Products</button>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2">
+                @if (ourProducts) {
+                @for (product of ourProducts; track product.id) {
+                <div class="col">
+                    <div class="card-container">
+                        <div class="card d-flex flex-row align-items-center gap-3 mt-3 p-2">
+                            <img [src]="product.thumbnail_image" alt="">
+                            <div class="card-body mt-2">
+                                <h5>{{product.product_type_name}}</h5>
+                                <p>${{product.price}}/{{product.price_per_unit}}</p>
+                                <p><app-rating></app-rating></p>
+                                <p><span class="btn organic_type">{{
+                                        product.organic ? "Organic" : "Conventional"
+                                        }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+            </div>
+        </main>
+
+        <aside class="import-from col-3 border">
+            <h5 class="pb-3 pt-3 border-bottom">Import From</h5>
+            <div>
+                @if(importCountries){
+                @for (importCountry of importCountries; track $index) {
+
+                <p><img style="height: 20px; width: 20px; margin-right: 20px;" [src]="importCountry.country_flag"
+                        alt="">{{importCountry.country}}</p>
+                }
+                }
+            </div>
+        </aside>
+    </div>
+
+    <div class="row">
+        <div class="col-8"></div>
+        <aside class="import-from col-3 border mt-5 mb-5">
+            <h5 class="pb-3 pt-3 border-bottom">Export To</h5>
+            <div>
+                @if(importCountries){
+                @for (importCountry of importCountries; track $index) {
+
+                <p><img style="height: 20px; width: 20px; margin-right: 20px;" [src]="importCountry.country_flag"
+                        alt="">{{importCountry.country}}</p>
+                }
+                }
+            </div>
+        </aside>
+    </div>
+</div>

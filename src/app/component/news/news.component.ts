@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { ProductsService } from '../../service/products-Service/products.service';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class NewsComponent implements OnInit {
   newsList: any[] = [];
+  @Input() companyId: any;
 
   constructor(
     private productsService: ProductsService,
