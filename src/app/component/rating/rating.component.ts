@@ -9,5 +9,5 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './rating.component.css',
 })
 export class RatingComponent {
-  rating = 5;
+  rating = 60;
 }

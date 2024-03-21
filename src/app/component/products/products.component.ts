@@ -76,22 +76,6 @@ export class ProductsComponent implements OnInit {
     this.router.navigate(['company', companyId]);
   }
 
-  //   sortProducts(option: string) {
-  //     debugger;
-  //     this.selectedSortOption = option;
-  //     if (option === 'newListing') {
-  //       this.products.sort((a, b) => {
-  //         let date1 = new Date(b.updated_at);
-  //         let date2 = new Date(a.updated_at);
-  //         return date1.valueOf() - date2.valueOf();
-  //       });
-  //     } else if (option === 'productName') {
-  //       this.products.sort((a, b) => {
-  //         return a.product_type_name.localeCompare(b.product_type_name);
-  //       });
-  //     }
-  //   }
-
   sortProductsLatest() {
     this.products.sort((a, b) => {
       let date1 = new Date(b.updated_at);

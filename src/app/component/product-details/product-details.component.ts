@@ -5,13 +5,16 @@ import { ProductsService } from '../../service/products-Service/products.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { RatingComponent } from '../rating/rating.component';
 import { SearchService } from '../../service/search-service/search.service';
+import { QuoteModalComponent } from '../quote-modal/quote-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
-  imports: [HeaderComponent, SearchBarComponent, RatingComponent],
+  imports: [HeaderComponent, SearchBarComponent, RatingComponent, NgStyle],
 })
 export class ProductDetailsComponent implements OnInit {
   productDetails: any[] = [];
@@ -19,10 +22,12 @@ export class ProductDetailsComponent implements OnInit {
   productId: any;
   listingType: any;
   rating: any;
+  count: number = 0;
   constructor(
     private productsService: ProductsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -67,4 +72,24 @@ export class ProductDetailsComponent implements OnInit {
   navigateToCompany(companyId: number) {
     this.router.navigate(['company', companyId]);
   }
+
+  increaseQuantity() {
+    this.count++;
+  }
+
+  decreaseQuantity() {
+    if (this.count > 0) {
+      this.count--;
+    }
+  }
+
+  openQuoteModal(productID: any) {
+    const modalRef = this.modalService.open(QuoteModalComponent, {
+      size: 'lg',
+    });
+    modalRef.componentInstance.productId = productID;
+    modalRef.componentInstance.productDetails = this.productDetails;
+  }
+
+  openOfferModal() {}
 }

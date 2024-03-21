@@ -1,0 +1,27 @@
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="mt-3 mb-3">
+        <img src="../../../assets/logo.png" alt="">
+    </div>
+    <div class="login_form border mt-3 p-5">
+        <h4 class="mb-4">Create an account</h4>
+        <form #signIn="ngForm" (ngSubmit)="createAccount()">
+            <div class="mb-4 form-group">
+                <label for="company" class="form-label fw-medium">Company</label>
+                <input type="text" class="form-control" id="company" name="company" #company="ngModel"
+                    [(ngModel)]="signupModel.companyName" placeholder="Company Name" required>
+            </div>
+            <div class="mb-4 form-group">
+                <label for="email" class="form-label fw-medium">Your email</label>
+                <input type="email" class="form-control" id="email" name="email" #email="ngModel"
+                    [(ngModel)]="signupModel.email" placeholder="name@company.com" required>
+            </div>
+            <div class="mb-4 form-group">
+                <label for="password" class="form-label fw-medium">Password</label>
+                <input type="password" class="form-control" id="password" name="password" #password="ngModel"
+                    [(ngModel)]="signupModel.password" placeholder="......" required>
+            </div>
+            <button class="btn btn-primary w-100" type="submit">Create an account</button>
+        </form>
+        <p class="mt-4 signup-text">Already have an account? <a routerLink="/loginorsiginup">Login here</a></p>
+    </div>
+</div>

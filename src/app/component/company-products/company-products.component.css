@@ -17,15 +17,16 @@
   text-wrap: nowrap;
 }
 
-.card {
+.productCard {
   img {
     height: 100px;
     width: 100px;
   }
   background-color: rgb(231, 230, 230);
+  width: 100%;
 }
 
 .card-container {
   width: 400px;
-  height: 50px;
+  margin-bottom: 20px;
 }

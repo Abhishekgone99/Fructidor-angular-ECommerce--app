@@ -9,11 +9,13 @@ import { NewsDetailsComponent } from './component/news-details/news-details.comp
 import { CompanyOverviewComponent } from './component/company-overview/company-overview.component';
 import { CompanyProductsComponent } from './component/company-products/company-products.component';
 import { CompanyContactComponent } from './component/company-contact/company-contact.component';
+import { SignUpComponent } from './component/sign-up/sign-up.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'loginorsiginup', component: LoginComponent },
+  { path: 'signup', component: SignUpComponent },
   { path: 'news', component: NewsComponent },
   { path: 'products', component: ProductsComponent },
   {

@@ -13,12 +13,12 @@
                 </div>
             </div>
 
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2">
+            <div class="row ">
                 @if (ourProducts) {
                 @for (product of ourProducts; track product.id) {
-                <div class="col">
+                <div class="col-6">
                     <div class="card-container">
-                        <div class="card d-flex flex-row align-items-center gap-3 mt-3 p-2">
+                        <div class="productCard d-flex flex-row align-items-center gap-3 mt-3 p-2">
                             <img [src]="product.thumbnail_image" alt="">
                             <div class="card-body mt-2">
                                 <h5>{{product.product_type_name}}</h5>

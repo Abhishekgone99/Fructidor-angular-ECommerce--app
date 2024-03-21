@@ -30,15 +30,38 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 15px;
+  }
+
+  .card-text.company {
+    font-size: 14px;
   }
   .card-text.company:hover {
     cursor: pointer;
     color: green;
   }
+
+  .price {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .price_unit {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .quantity {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .quantity_unit {
+    font-size: 12px;
+    font-weight: 400;
+  }
 }
 
 .origin_country {
-  border: 1px solid black;
+  border: 1px solid rgb(162, 162, 157);
+  background-color: rgb(248, 248, 248);
   border-radius: 20px;
   padding: 2px 10px;
   font-size: 12px;
@@ -52,7 +75,8 @@
   }
 }
 .organic_type {
-  border: 1px solid rgb(255, 255, 0);
+  border: 1px solid rgb(206, 210, 7);
+  background-color: rgb(255, 255, 239);
   border-radius: 20px;
   padding: 2px 10px;
   font-size: 12px;
@@ -75,4 +99,8 @@
   width: 80px;
   top: 118px;
   right: 0px;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 600;
 }

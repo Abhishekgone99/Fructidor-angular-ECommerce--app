@@ -1,0 +1,23 @@
+.container {
+  margin-left: 65px;
+}
+
+.staff {
+  width: 87%;
+  margin-left: 78px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(237, 231, 231);
+}
+.staff-card {
+  padding: 20px;
+
+  h5 {
+    color: orangered;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}

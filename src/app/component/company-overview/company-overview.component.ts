@@ -5,13 +5,14 @@ import {
   NgbProgressbarConfig,
   NgbProgressbarModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-company-overview',
   standalone: true,
   templateUrl: './company-overview.component.html',
   styleUrl: './company-overview.component.css',
-  imports: [NgbProgressbarModule],
+  imports: [NgbProgressbarModule, NgStyle],
 })
 export class CompanyOverviewComponent implements OnInit {
   @Input() companyProfile: any;

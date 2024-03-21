@@ -14,10 +14,10 @@
     <div class="mainProductImage">
         <img [src]="productdetail.thumbnail_image" alt="">
         <div class="subProductImage">
-            <img [src]="productdetail.feature_image" alt="">
-            <img [src]="productdetail.feature_image" alt="">
-            <img [src]="productdetail.feature_image" alt="">
-            <img [src]="productdetail.feature_image" alt="">
+            <img [src]="productdetail.thumbnail_image" alt="">
+            <img [src]="productdetail.thumbnail_image" alt="">
+            <img [src]="productdetail.thumbnail_image" alt="">
+            <img [src]="productdetail.thumbnail_image" alt="">
         </div>
     </div>
 
@@ -30,12 +30,14 @@
             <span class="btn class_type">
                 {{productdetail.product_class}}</span>
         </h4>
-        <h5>{{productdetail.company_name}}</h5>
-        <p>${{productdetail.price}}/{{productdetail.price_per_unit}}</p>
+        <h5 (click)="navigateToCompany(productdetail.company_id)">{{productdetail.company_name}}</h5>
+        <p class="price"><strong>${{productdetail.price}}</strong>/{{productdetail.price_per_unit}}</p>
         <p><app-rating></app-rating></p>
-        <div>Quantity <button><i class="fa-solid fa-minus"></i></button> <span>0</span> <button><i
-                    class="fa-solid fa-plus"></i></button> in kg</div>
-        <div class="d-flex gap-2">
+        <div class="quantity mb-3"><strong>Quantity</strong> <button (click)="decreaseQuantity()"><i
+                    class="fa-solid fa-minus"></i></button>
+            <span>{{count}}</span> <button (click)="increaseQuantity()"><i class="fa-solid fa-plus"></i></button> in kg
+        </div>
+        <div class="month d-flex gap-2 mb-3">
             <div>Jan</div>
             <div>Feb</div>
             <div>Mar</div>
@@ -49,33 +51,38 @@
             <div>Nov</div>
             <div>Dec</div>
         </div>
-        <div>
+        <div class="mb-3" style="font-size: 12px; color: gray;">
             1K+ Buyers Bought in Last Month
         </div>
-        <div>
+        <div class="quote-btn">
             @if (productdetail.listing_type == 'offer') {
-            <button>Get a quote</button>
+            <button (click)="openQuoteModal(productdetail.id)">Get a quote</button>
             }@else{
-            <button>Offer</button>
+            <button (click)="openOfferModal()">Offer</button>
             }
         </div>
-        <div class="d-flex gap-3">
-            <div class="d-flex gap-2">
+        <div class="d-flex gap-3 mb-3">
+            <div class="d-flex gap-2 border p-3">
                 <img src="../../../assets/pacakge.svg" alt="">
                 <div>
-                    <div>Box Weight:{{productdetail.box_weight}}</div>
-                    <div>Box Type:{{productdetail.box_type}}</div>
+                    <div class="fw-bold" style="font-size: 10px; text-wrap: nowrap;">Box
+                        Weight:{{productdetail.box_weight}}</div>
+                    <div class="fw-bold" style="font-size: 10px; text-wrap: nowrap;">Box Type:{{productdetail.box_type}}
+                    </div>
                 </div>
             </div>
-            <div class="d-flex gap-2">
+            <div class="d-flex gap-2 border p-3">
                 <img src="../../../assets/vehicle.svg" alt="">
                 <div>
-                    <div>Port Loading:{{productdetail.loading_port}}</div>
-                    <div>Est.Loading Time:{{productdetail.est_loading_time}}</div>
+                    <div class="fw-bold" style="font-size: 10px; text-wrap: nowrap;">Port
+                        Loading:{{productdetail.loading_port}}</div>
+                    <div class="fw-bold" style="font-size: 10px; text-wrap: nowrap;">Est.Loading
+                        Time:{{productdetail.est_loading_time}}</div>
                 </div>
             </div>
         </div>
-        <div>Extra Information <p>{{productdetail.information}}</p>
+        <div><span class="fw-bold">Extra Information</span>
+            <p class="mt-2" style="font-size: 14px;">{{productdetail.information}}</p>
         </div>
 
     </div>
@@ -84,33 +91,41 @@
 }
 
 <div>
-    <div>Similar Products you might like</div>
+    <div class="simProd-heading">Similar Products you might like</div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5">
+    <div class="simProducts row row-cols-1 row-cols-md-2 row-cols-lg-5">
         @if (productList) { @for (product of productList; track product.id) {
         <div class="col">
             <section class="card-container">
                 <div class="card">
-                    <img [src]="product.thumbnail_image" class="card-img-top" alt="..." (click)="
-                  navigateToProductDetails(product.listing_type, product.id)
-                " />
+                    <div>
+                        <img [src]="product.thumbnail_image" class="card-img-top" alt="..." (click)="
+                        navigateToProductDetails(product.listing_type, product.id)
+                      " />
+                        <div class="offer-label"
+                            [ngStyle]="{'background-color': product.listing_type === 'offer' ? 'orangered' : 'green'}">
+                            {{product.listing_type === 'offer' ? 'Offer' : 'Demand'}}</div>
+                    </div>
                     <div class="card-body">
                         <h6 class="card-title" (click)="
-                    navigateToProductDetails(product.listing_type, product.id)
-                  ">
+                          navigateToProductDetails(product.listing_type, product.id)
+                        ">
                             {{ product.product_type_name }}
                             {{ product.product_variety_name }}
                         </h6>
-                        <p class="card-text company" (click)="navigateToCompany(product.company_id)">
+                        <p class="card-text company fw-bold" (click)="navigateToCompany(product.company_id)">
                             {{ product.company_name }}
                         </p>
                         @if (product.price && product.price_per_unit) {
                         <p class="card-text">
-                            ${{ product.price }} / {{ product.price_per_unit }}
+                            <span class="price">${{ product.price }}</span> / <span class="price_unit">{{
+                                product.price_per_unit
+                                }}</span>
                         </p>
                         } @if (product.quantity && product.quantity_unit) {
                         <p class="card-text">
-                            <span class="mx-1">{{ product.quantity }}</span><span>{{ product.quantity_unit }}</span>
+                            <span class="mx-1 quantity">{{ product.quantity }}</span><span class="quantity_unit">{{
+                                product.quantity_unit }}</span>
                         </p>
                         }
                         <div>

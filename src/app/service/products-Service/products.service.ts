@@ -130,6 +130,11 @@ export class ProductsService {
     return this.http.get(`${_url}/${companyId}/news`);
   }
 
+  postQuoteRequest(companyId: any, payload: any): Observable<any> {
+    const _url = 'https://marketplace.hashagile.com/api/company';
+    return this.http.post(`${_url}/${companyId}/quote_requests`, payload);
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(() => new Error(error.statusText));
   }

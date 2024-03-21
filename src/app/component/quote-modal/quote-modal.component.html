@@ -1,0 +1,93 @@
+<div class="modal-header">
+    <h4 class="modal-title">REQUEST A QUOTE</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col">
+            <form #quoteForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3 form-group">
+                    <label for="name" class="form-label">Your Name</label>
+                    <input type="name" class="form-control" id="name" name="name" #name="ngModel"
+                        [(ngModel)]="quoteModel.name" required>
+                </div>
+                <div class="mb-3 form-group">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" #email="ngModel"
+                        [(ngModel)]="quoteModel.email" required>
+                </div>
+                <div class="mb-3 form-group">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="phone" class="form-control" id="phone" name="phone" #phone="ngModel"
+                        [(ngModel)]="quoteModel.phone" required>
+                </div>
+                <div class="mb-3 form-group">
+                    <label for="date" class="form-label">Delivery Deadline</label>
+                    <input type="date" class="form-control" id="date" name="date" #deliverydate="ngModel"
+                        [(ngModel)]="quoteModel.deliverydate" required>
+                </div>
+                <div class="mb-3 form-group">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <div class="d-flex">
+                        <input type="number" class="form-control" id="quantity" name="quantity" #quantity="ngModel"
+                            [(ngModel)]="quoteModel.quantity" required>
+                        <select name="weight" id="weight" style="background-color: rgb(232, 225, 225);"
+                            #quantity_unit="ngModel" [(ngModel)]="quoteModel.quantiy_unit">
+                            <option value="Kg" selected>in_Kg</option>
+                            <option value="Tonne">in_Tonne</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-warning" type="submit">Send Your Request</button>
+            </form>
+        </div>
+        <div class="col px-5">
+            <section class="card-container">
+                <div class="card">
+                    <div>
+                        <img [src]="productDetails[0].thumbnail_image" class="card-img-top" alt="..." (click)="
+                                navigateToProductDetails(productDetails[0].listing_type, productDetails[0].id)
+                              " />
+                        <div class="offer-label"
+                            [ngStyle]="{'background-color': productDetails[0].listing_type === 'offer' ? 'orangered' : 'green'}">
+                            {{productDetails[0].listing_type === 'offer' ? 'Offer' : 'Demand'}}</div>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title" (click)="
+                                  navigateToProductDetails(productDetails[0].listing_type, productDetails[0].id)
+                                ">
+                            {{ productDetails[0].product_type_name }}
+                            {{ productDetails[0].product_variety_name }}
+                        </h6>
+                        <p class="card-text company fw-bold" (click)="navigateToCompany(productDetails[0].company_id)">
+                            {{ productDetails[0].company_name }}
+                        </p>
+                        @if (productDetails[0].price && productDetails[0].price_per_unit) {
+                        <p class="card-text">
+                            <span class="price">${{ productDetails[0].price }}</span> / <span class="price_unit">{{
+                                productDetails[0].price_per_unit
+                                }}</span>
+                        </p>
+                        } @if (productDetails[0].quantity && productDetails[0].quantity_unit) {
+                        <p class="card-text">
+                            <span class="mx-1 quantity">{{ productDetails[0].quantity }}</span><span
+                                class="quantity_unit">{{
+                                productDetails[0].quantity_unit }}</span>
+                        </p>
+                        }
+                        <div>
+                            @if (productDetails[0].origin) {
+                            <span class="btn origin_country"><img src="../../../assets/location.svg" alt="" />{{
+                                productDetails[0].origin
+                                }}</span>
+                            }
+                            <span class="btn organic_type">{{
+                                productDetails[0].organic ? "Organic" : "Conventional"
+                                }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
