@@ -92,4 +92,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   openOfferModal() {}
+
+  onSearchChanged(searchTerm: string) {
+    // Navigate to products component with the search term
+    this.router.navigate(['/home']);
+  }
 }

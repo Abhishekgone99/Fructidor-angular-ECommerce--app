@@ -31,8 +31,8 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchProducts();
-    this.fetchFilterCategories();
+    // this.fetchProducts();
+    // this.fetchFilterCategories();
     // this.sortProducts('newListing');
     this.searchService.searchTerm.subscribe((term: string) => {
       this.payload.query = term;
@@ -77,16 +77,16 @@ export class ProductsComponent implements OnInit {
   }
 
   sortProductsLatest() {
-    this.products.sort((a, b) => {
-      let date1 = new Date(b.updated_at);
-      let date2 = new Date(a.updated_at);
-      return date1.valueOf() - date2.valueOf();
-    });
+    // this.products.sort((a, b) => {
+    //   let date1 = new Date(b.updated_at);
+    //   let date2 = new Date(a.updated_at);
+    //   return date1.valueOf() - date2.valueOf();
+    // });
   }
 
   sortProductsByName() {
-    this.products.sort((a, b) => {
-      return a.product_type_name.localeCompare(b.product_type_name);
-    });
+    // this.products.sort((a, b) => {
+    //   return a.product_type_name.localeCompare(b.product_type_name);
+    // });
   }
 }

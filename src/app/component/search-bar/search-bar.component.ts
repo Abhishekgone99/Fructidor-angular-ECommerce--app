@@ -10,11 +10,13 @@ import { SearchService } from '../../service/search-service/search.service';
   styleUrl: './search-bar.component.css',
 })
 export class SearchBarComponent {
+  @Output() searchChanged = new EventEmitter<string>();
   searchTerm: string = '';
 
   constructor(private searchService: SearchService) {}
 
-  onSearchTermChange() {
-    this.searchService.changeSearchTerm(this.searchTerm);
+  onSubmit() {
+    this.searchChanged.emit(this.searchTerm);
+    this.searchService.setSearchTerm(this.searchTerm); // Set the search term in the service
   }
 }

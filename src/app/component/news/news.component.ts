@@ -35,4 +35,9 @@ export class NewsComponent implements OnInit {
   navigateToNewsDetails(newsId: number) {
     this.router.navigate(['news', newsId]);
   }
+
+  onSearchChanged(searchTerm: string) {
+    // Navigate to products component with the search term
+    this.router.navigate(['/home']);
+  }
 }
