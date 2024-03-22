@@ -16,13 +16,14 @@ main {
 .subProductImage {
   img {
     height: 85.5px;
-    width: 85.5px;
+    width: 85px;
     margin-top: 20px;
-    margin-right: 20px;
+    margin-right: 15px;
   }
 }
 
 .productInfo {
+  margin-left: 50px;
   h4 {
     color: orangered;
   }
@@ -64,6 +65,10 @@ main {
     color: white;
     padding: 10px 15px 10px 15px;
     margin-bottom: 15px;
+  }
+
+  .blurred {
+    filter: blur(2px); /* Adjust the blur intensity as needed */
   }
 }
 
@@ -175,6 +180,19 @@ main {
   width: 80px;
   top: 118px;
   right: 0px;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.offer-label-main {
+  position: relative;
+  color: white;
+  padding: 4px;
+  width: 80px;
+  top: -32px;
+  left: 320px;
   text-align: center;
   border-radius: 3px;
   font-size: 16px;
