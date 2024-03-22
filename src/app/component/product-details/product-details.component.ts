@@ -8,13 +8,20 @@ import { SearchService } from '../../service/search-service/search.service';
 import { QuoteModalComponent } from '../quote-modal/quote-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgStyle } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
-  imports: [HeaderComponent, SearchBarComponent, RatingComponent, NgStyle],
+  imports: [
+    HeaderComponent,
+    SearchBarComponent,
+    RatingComponent,
+    NgStyle,
+    RouterLink,
+  ],
 })
 export class ProductDetailsComponent implements OnInit {
   productDetails: any[] = [];

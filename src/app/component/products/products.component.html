@@ -17,7 +17,7 @@
   <div class="container-fluid">
     <div class="row">
       <aside class="col-2 border border-secondary-subtle">
-        <div class="border-bottom mt-2 mb-2">Filters</div>
+        <div class="mt-2 mb-2 mx-3 fw-bold fs-5"><img class="mx-3" src="../../../assets/filter.svg" alt="">Filters</div>
         @if (filterCategories) {
         <div class="accordion accordion-flush" id="accordionFlushExample">
           <div class="accordion-item">
@@ -117,22 +117,21 @@
       </aside>
 
       <main class="col-10 border-top border-secondary-subtle">
-        <div class="border-bottom mt-2 mb-2">Filter</div>
+        <div class="cultivation_type mt-2 mb-2">Filter <span>Cultivation Type
+            All</span></div>
+        <hr>
         <div class="d-flex justify-content-between mt-3 mb-3">
           <div>
             All Listings (<span>{{ products.length }}</span>)
           </div>
-          <div>
-            <div class="dropdown">
-              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Sort by :
-              </button>
-              <ul class="dropdown-menu">
-                <li class="dropdown-item" (click)="sortProductsLatest()">New Listings</li>
-                <li class="dropdown-item" (click)="sortProductsByName()">Product Name</li>
-              </ul>
-            </div>
+          <div class="d-flex border p-2">
+            <label for="sort-select"
+              style="text-wrap: nowrap; margin-top: 7px; margin-right: 3px; font-size: 14px;">Sort by:</label>
+            <select #sortSelect id="sort-select" class="form-select" style="border: none; cursor: pointer;"
+              aria-label="Sort-by" (change)="sortProducts(sortSelect.value)">
+              <option value="2" [selected]="selectedOption === '2'">Product Name</option>
+              <option value="1" [selected]="selectedOption === '1'">New Listings</option>
+            </select>
           </div>
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5">

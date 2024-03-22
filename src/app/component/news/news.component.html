@@ -10,15 +10,15 @@
         <div class="card d-flex flex-row align-items-center mt-3 mx-5 p-3">
             <img style="height: 200px; width: 200px;" [src]="news.image_url" alt="">
             <div class="card-body mt-2">
-                <h5>{{news.title}}</h5>
-                <p>{{news.created_at}}
-                    <span class="btn origin_country">
+                <h5 style="color: orangered;">{{news.title}}<span class="btn origin_country mx-2">
                         <img src="../../../assets/location.svg" alt="" />
                         {{news.country_name}}
-                    </span>
+                    </span></h5>
+                <p>{{news.created_at}}
                 </p>
                 <p>{{news.summary}}</p>
-                <p (click)="navigateToNewsDetails(news.id)">Read more <i class="fa-solid fa-arrow-right"></i></p>
+                <p (click)="navigateToNewsDetails(news.id)" style="cursor: pointer; color: orangered;">Read more <i
+                        class="fa-solid fa-arrow-right"></i></p>
             </div>
         </div>
     </div>

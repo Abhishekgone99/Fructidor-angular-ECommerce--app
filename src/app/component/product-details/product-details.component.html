@@ -4,7 +4,9 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Cauliflower</li>
+        @for (productdetail of productDetails; track $index) {
+        <li class="breadcrumb-item active fs-6 fw-bold" aria-current="page">{{productdetail.product_type_name}}</li>
+        }
     </ol>
 </nav>
 
@@ -25,7 +27,7 @@
     </div>
 
     <div class="productInfo">
-        <h4>{{productdetail.product_variety_name}}
+        <h4>{{productdetail.product_type_name}} {{productdetail.product_variety_name}}
             <span class="btn origin_country"><img src="../../../assets/location.svg" alt="" />
                 {{productdetail.origin}}</span>
             <span class="btn organic_type">

@@ -22,6 +22,17 @@ main {
   }
 }
 
+.breadcrumb {
+  text-align: center;
+}
+
+.breadcrumb-item {
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
 .productInfo {
   margin-left: 50px;
   h4 {

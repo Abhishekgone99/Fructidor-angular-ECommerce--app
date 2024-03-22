@@ -22,8 +22,7 @@ export class ProductsComponent implements OnInit {
     company: [],
   };
   activeButton: string = 'all';
-  selectedSortOption: string = 'newListing';
-
+  selectedOption: string = '1';
   constructor(
     private productService: ProductsService,
     private router: Router,
@@ -32,12 +31,11 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.fetchProducts();
-    // this.fetchFilterCategories();
-    // this.sortProducts('newListing');
     this.searchService.searchTerm.subscribe((term: string) => {
       this.payload.query = term;
       this.fetchProducts();
     });
+    this.fetchFilterCategories();
   }
 
   fetchProducts() {
@@ -76,17 +74,34 @@ export class ProductsComponent implements OnInit {
     this.router.navigate(['company', companyId]);
   }
 
+  sortProducts(value: any) {
+    debugger;
+    if (value === this.selectedOption) {
+      return; // No need to sort if the sorting option hasn't changed
+    }
+    this.selectedOption = value;
+    if (value === '2') {
+      this.sortProductsByName();
+    } else if (value === '1') {
+      this.sortProductsLatest();
+    }
+  }
+
   sortProductsLatest() {
-    // this.products.sort((a, b) => {
-    //   let date1 = new Date(b.updated_at);
-    //   let date2 = new Date(a.updated_at);
-    //   return date1.valueOf() - date2.valueOf();
-    // });
+    debugger;
+    const sortproducts = [...this.products];
+    this.products = sortproducts.sort((a, b) => {
+      return b.created_at - a.created_at;
+    });
+    console.log('latest', this.products);
   }
 
   sortProductsByName() {
-    // this.products.sort((a, b) => {
-    //   return a.product_type_name.localeCompare(b.product_type_name);
-    // });
+    debugger;
+    const sortproducts = [...this.products];
+    this.products = sortproducts.sort((a, b) =>
+      a.product_type_name.localeCompare(b.product_type_name)
+    );
+    console.log('alphabatical', this.products);
   }
 }

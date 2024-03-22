@@ -104,3 +104,21 @@
   font-size: 16px;
   font-weight: 600;
 }
+
+.cultivation_type {
+  span {
+    border: 1px solid gray;
+    font-size: 12px;
+    padding: 4px 5px;
+  }
+}
+
+aside {
+  background-color: rgb(240, 237, 237);
+  border-radius: 2px;
+}
+
+.accordion-flush > .accordion-item {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
