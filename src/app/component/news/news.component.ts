@@ -27,7 +27,7 @@ export class NewsComponent implements OnInit {
   fetchNewsList() {
     this.productsService.getNewsList().subscribe({
       next: (res) => {
-        this.newsList = res;
+        this.newsList = res.news;
       },
     });
   }

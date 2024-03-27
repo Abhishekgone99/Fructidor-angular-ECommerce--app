@@ -10,6 +10,7 @@ import { CompanyOverviewComponent } from './component/company-overview/company-o
 import { CompanyProductsComponent } from './component/company-products/company-products.component';
 import { CompanyContactComponent } from './component/company-contact/company-contact.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
+import { CompanyResolver } from './resolver/company.resolver';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -25,6 +26,9 @@ export const routes: Routes = [
   {
     path: 'company/:id',
     component: CompanyDetailsComponent,
+    resolve: {
+      companyData: CompanyResolver
+    },
     children: [
       { path: 'overview', component: CompanyOverviewComponent },
       { path: 'ourProducts', component: CompanyProductsComponent },

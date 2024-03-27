@@ -39,68 +39,78 @@ export class CompanyDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.data.subscribe((data: any) => {
+      this.basicCompanyDetails = data.companyData[0];
+      this.staffDetails = data.companyData[1];
+      this.companyStats = data.companyData[2];
+      this.additionalCompanyDetails = data.companyData[3];
+      this.companyProfile = data.companyData[4];
+      this.newsList = data.companyData[9].news;
+    });
     this.route.paramMap.subscribe((params) => {
       this.companyId = params.get('id');
     });
-    this.fetchBasicCompanyDetails();
-    this.fetchStaffDetails();
-    this.fetchCompanyStats();
-    this.fetchAdditionalCompanyDetails();
-    this.fetchCompanyProfile();
-    this.fetchCompanyNews();
+    // this.fetchBasicCompanyDetails();
+    // this.fetchStaffDetails();
+    // this.fetchCompanyStats();
+    // this.fetchAdditionalCompanyDetails();
+    // this.fetchCompanyProfile();
+    // this.fetchCompanyNews();
 
     this.selectedTab = 'overview';
   }
 
-  fetchBasicCompanyDetails() {
-    this.productService.getBasicCompanyDetails(this.companyId).subscribe({
-      next: (res) => {
-        this.basicCompanyDetails = res;
-      },
-    });
-  }
-
-  fetchStaffDetails() {
-    this.productService.getStaffDetails(this.companyId).subscribe({
-      next: (res) => {
-        this.staffDetails = res;
-      },
-    });
-  }
-
-  fetchCompanyStats() {
-    this.productService.getCompanyStats(this.companyId).subscribe({
-      next: (res) => {
-        this.companyStats = res;
-      },
-    });
-  }
-
-  fetchAdditionalCompanyDetails() {
-    this.productService.getAdditionalComapnyDetails(this.companyId).subscribe({
-      next: (res) => {
-        this.additionalCompanyDetails = res;
-      },
-    });
-  }
-
-  fetchCompanyProfile() {
-    this.productService.getCompanyprofile(this.companyId).subscribe({
-      next: (res) => {
-        this.companyProfile = res;
-      },
-    });
-  }
-
-  // navigateToOverview() {
-  //   this.router.navigate(['/overview']);
+  // fetchBasicCompanyDetails() {
+  //   this.productService.getBasicCompanyDetails(this.companyId).subscribe({
+  //     next: (res) => {
+  //       this.basicCompanyDetails = res;
+  //     },
+  //   });
   // }
 
-  // navigateToProducts() {}
+  // fetchStaffDetails() {
+  //   this.productService.getStaffDetails(this.companyId).subscribe({
+  //     next: (res) => {
+  //       this.staffDetails = res;
+  //     },
+  //   });
+  // }
 
-  // navigateToNews() {}
+  // fetchCompanyStats() {
+  //   this.productService.getCompanyStats(this.companyId).subscribe({
+  //     next: (res) => {
+  //       this.companyStats = res;
+  //     },
+  //   });
+  // }
 
-  // navigateToContactus() {}
+  // fetchAdditionalCompanyDetails() {
+  //   this.productService.getAdditionalComapnyDetails(this.companyId).subscribe({
+  //     next: (res) => {
+  //       this.additionalCompanyDetails = res;
+  //     },
+  //   });
+  // }
+
+  // fetchCompanyProfile() {
+  //   this.productService.getCompanyprofile(this.companyId).subscribe({
+  //     next: (res) => {
+  //       this.companyProfile = res;
+  //     },
+  //   });
+  // }
+
+  // fetchCompanyNews() {
+  //   this.productService.getCompanyNews(this.companyId).subscribe({
+  //     next: (res) => {
+  //       this.newsList = res;
+  //     },
+  //   });
+  // }
+
+  navigateToNewsDetails(newsId: number) {
+    this.router.navigate(['news', newsId]);
+  }
 
   showTab(tabName: string) {
     this.selectedTab = tabName;
@@ -111,15 +121,4 @@ export class CompanyDetailsComponent implements OnInit {
     });
   }
 
-  fetchCompanyNews() {
-    this.productService.getCompanyNews(this.companyId).subscribe({
-      next: (res) => {
-        this.newsList = res;
-      },
-    });
-  }
-
-  navigateToNewsDetails(newsId: number) {
-    this.router.navigate(['news', newsId]);
-  }
 }
